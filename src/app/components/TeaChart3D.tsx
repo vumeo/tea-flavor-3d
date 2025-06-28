@@ -377,7 +377,7 @@ function TeaChart3DScene() {
           <DataPoint
             position={point.position}
             color={point.color}
-            size={point.isAverage ? 0.07 : 0.05}
+                            size={0.05}
             isSpecial={index === 9 || point.isAverage}
             onClick={() => setSelectedPoint(point.position)}
           />

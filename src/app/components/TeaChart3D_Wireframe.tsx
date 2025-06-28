@@ -348,7 +348,7 @@ function TeaChart3DWireframeScene() {
           <WireframePoint
             position={point.position}
             color={point.color}
-            size={point.isAverage ? 0.06 : 0.04}
+                            size={0.04}
             onClick={() => setSelectedPoint(point.position)}
           />
           {/* Chỉ hiển thị số thứ tự - luôn hướng về camera */}

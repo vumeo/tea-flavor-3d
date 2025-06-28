@@ -306,7 +306,7 @@ function TeaChart3DParticleScene() {
     // Kích thước và cường độ cho điểm trung bình
     const avgTotalValue = avgBitterness + avgSweetness + avgFloral
     const maxTotal = Math.max(...s_bitterness) + Math.max(...s_sweetness) + Math.max(...s_floral)
-    const avgSize = 0.03 + (avgTotalValue / maxTotal) * 0.08 // Lớn hơn một chút
+    const avgSize = 0.02 + (avgTotalValue / maxTotal) * 0.06 // Cùng kích thước với các điểm khác
     const avgIntensity = 0.3 + (avgTotalValue / maxTotal) * 0.7
     
     points.push({

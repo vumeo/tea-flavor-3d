@@ -362,7 +362,7 @@ function TeaChart3DContentScene() {
           <ContentCube
             position={point.position}
             color={point.color}
-            size={point.isAverage ? 0.07 : 0.05}
+                            size={0.05}
             isSpecial={index === 9 || index === 15 || point.isAverage}
             onClick={() => setSelectedPoint(point.position)}
           />
