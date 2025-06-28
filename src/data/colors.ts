@@ -3,7 +3,7 @@ export const COLORS = {
   // Màu trục tọa độ
   axes: {
     bitterness: '#646b3a',    // Màu cafe cho trục Chát/Đắng
-    sweetness: '#a45429',     // Màu mật ong cho trục Ngọt
+    sweetness: '#ed8c00',     // Màu mật ong cho trục Ngọt
     floral: '#9c88ff',        // Màu xanh nhạt cho trục Hương Hoa
   },
 

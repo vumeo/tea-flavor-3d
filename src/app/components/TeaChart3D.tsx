@@ -336,22 +336,22 @@ function TeaChart3DScene() {
     return lines
   }, [dataPoints])
 
-  // Tạo đoạn thẳng trên đường OG từ 0.5×OG đến 1.5×OG
+  // Tạo đoạn thẳng trên đường OG từ 0.7×OG đến 1.3×OG
   const ogLine = useMemo(() => {
     if (dataPoints.length === 0) return null
     
     const pointG = dataPoints[dataPoints.length - 1] // Điểm G là điểm cuối cùng
     const [gx, gy, gz] = pointG.position
     
-    // Điểm bắt đầu = 0.5 * vector_OG
-    const startPoint = [gx * 0.5, gy * 0.5, gz * 0.5]
+    // Điểm bắt đầu = 0.7 * vector_OG
+    const startPoint = [gx * 0.7, gy * 0.7, gz * 0.7]
     
-    // Điểm kết thúc = 1.5 * vector_OG
-    const endPoint = [gx * 1.5, gy * 1.5, gz * 1.5]
+    // Điểm kết thúc = 1.3 * vector_OG
+    const endPoint = [gx * 1.3, gy * 1.3, gz * 1.3]
     
     return [
-      new THREE.Vector3(...startPoint), // Điểm 0.5×OG
-      new THREE.Vector3(...endPoint) // Điểm 1.5×OG
+      new THREE.Vector3(...startPoint), // Điểm 0.7×OG
+      new THREE.Vector3(...endPoint) // Điểm 1.3×OG
     ]
   }, [dataPoints])
 
@@ -391,7 +391,7 @@ function TeaChart3DScene() {
         />
       ))}
       
-      {/* Đoạn thẳng trên đường OG từ 0.5×OG đến 1.5×OG */}
+      {/* Đoạn thẳng trên đường OG từ 0.7×OG đến 1.3×OG */}
       {ogLine && (
         <Line 
           points={ogLine} 
