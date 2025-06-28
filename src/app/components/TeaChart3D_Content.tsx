@@ -389,6 +389,7 @@ function TeaChart3DContentScene() {
       ))}
       
       <OrbitControls 
+        target={[1, 1, 1]}
         enablePan={true}
         enableZoom={true}
         enableRotate={true}
@@ -416,7 +417,7 @@ export default function TeaChart3D_Content() {
       </div>
       
       <Canvas
-        camera={{ position: [3, 3, 3], fov: 75 }}
+        camera={{ position: [4, 4, 4], fov: 75 }}
         style={{ width: '100%', height: '100%' }}
         gl={{ 
           antialias: true, 
