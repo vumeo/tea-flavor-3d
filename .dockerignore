@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Next.js
+.next/
+out/
+
+# Production
+build
+
+# Environment variables
+.env*
+
+# Debug
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# README
+README.md
+
+# Tests
+coverage
+.nyc_output
+
+# Misc
+*.tgz
+*.tar.gz 
