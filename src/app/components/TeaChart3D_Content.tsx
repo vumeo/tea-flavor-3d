@@ -265,20 +265,20 @@ function TeaChart3DContentScene() {
       }
     })
     
-    // Thêm điểm trung bình
-    const avgX = (avgBitterness / maxBitterness) * 2
-    const avgY = (avgSweetness / maxSweetness) * 2
-    const avgZ = (avgFloral / maxFloral) * 2
+    // Bỏ điểm trung bình G trong đồ thị 4
+    // const avgX = (avgBitterness / maxBitterness) * 2
+    // const avgY = (avgSweetness / maxSweetness) * 2
+    // const avgZ = (avgFloral / maxFloral) * 2
     
-    points.push({
-      position: [avgX, avgY, avgZ] as [number, number, number],
-      color: getPointColor(16, true), // Màu cho điểm trung bình
-      index: 16,
-      bitterness: avgBitterness.toFixed(3),
-      sweetness: avgSweetness.toFixed(3),
-      floral: avgFloral.toFixed(3),
-      isAverage: true
-    })
+    // points.push({
+    //   position: [avgX, avgY, avgZ] as [number, number, number],
+    //   color: getPointColor(16, true), // Màu cho điểm trung bình
+    //   index: 16,
+    //   bitterness: avgBitterness.toFixed(3),
+    //   sweetness: avgSweetness.toFixed(3),
+    //   floral: avgFloral.toFixed(3),
+    //   isAverage: true
+    // })
     
     return points
   }, [])
@@ -297,7 +297,7 @@ function TeaChart3DContentScene() {
 
   // Đường nối điểm A và B (nét đứt)
   const firstToLastLine = useMemo(() => {
-    if (dataPoints.length > 16) { // Đảm bảo có cả điểm A (index 0) và B (index 15)
+    if (dataPoints.length >= 16) { // Đảm bảo có cả điểm A (index 0) và B (index 15)
       return [
         new THREE.Vector3(...dataPoints[0].position),  // Điểm A
         new THREE.Vector3(...dataPoints[15].position)  // Điểm B (index 15)
@@ -305,6 +305,26 @@ function TeaChart3DContentScene() {
     }
     return []
   }, [dataPoints])
+
+  // Bỏ đoạn thẳng OG trong đồ thị 4
+  // const ogLine = useMemo(() => {
+  //   if (dataPoints.length === 0) return null
+  //   
+  //   const pointG = dataPoints[dataPoints.length - 1] // Điểm G là điểm cuối cùng
+  //   const [gx, gy, gz] = pointG.position
+  //   
+  //   // Điểm bắt đầu = 0.5 * vector_OG
+  //   const startPoint = [gx * 0.5, gy * 0.5, gz * 0.5]
+  //   
+  //   // Điểm kết thúc = 1.5 * vector_OG
+  //   const endPoint = [gx * 1.5, gy * 1.5, gz * 1.5]
+  //   
+  //   return [
+  //     new THREE.Vector3(...startPoint), // Điểm 0.5×OG
+  //     new THREE.Vector3(...endPoint) // Điểm 1.5×OG
+  //   ]
+  // }, [dataPoints])
+  const ogLine = null // Bỏ đường thẳng OG trong đồ thị 4
 
   return (
     <>
@@ -343,14 +363,28 @@ function TeaChart3DContentScene() {
         />
       ))}
       
-      {/* Đường nối điểm A và B (nét đứt) */}
+      {/* Đường nối điểm A và B (nét đứt màu trắng) */}
       {firstToLastLine.length > 0 && (
         <Line 
           points={firstToLastLine} 
-          color={COLORS.connections.dashed} 
+          color="#ffffff" 
           lineWidth={2} 
           transparent 
-          opacity={0.5}
+          opacity={0.8}
+          dashed
+          dashSize={0.1}
+          gapSize={0.05}
+        />
+      )}
+      
+      {/* Đoạn thẳng trên đường OG từ 0.5×OG đến 1.5×OG */}
+      {ogLine && (
+        <Line 
+          points={ogLine} 
+          color="#ffffff" 
+          lineWidth={3} 
+          transparent 
+          opacity={0.8}
           dashed
           dashSize={0.1}
           gapSize={0.05}
@@ -363,11 +397,11 @@ function TeaChart3DContentScene() {
             position={point.position}
             color={point.color}
                             size={0.05}
-            isSpecial={index === 9 || index === 15 || point.isAverage}
+            isSpecial={index === 9 || index === 15}
             onClick={() => setSelectedPoint(point.position)}
           />
-          {/* Chỉ hiển thị label A, B và AVG */}
-          {(index === 0 || index === 15 || point.isAverage) && (
+          {/* Chỉ hiển thị label A và B */}
+          {(index === 0 || index === 15) && (
             <Billboard position={[
               point.position[0] + (index === 0 ? 0.08 : 0.08), 
               point.position[1] + (index === 0 ? 0.08 : (index === 15 || point.isAverage ? 0.12 : 0.08)), // Giảm khoảng cách cho điểm B và G
@@ -381,7 +415,7 @@ function TeaChart3DContentScene() {
                 outlineWidth={0.03}
                 outlineColor={getTextOutlineColor(point.isAverage)}
               >
-                {point.isAverage ? 'G' : (index === 0 ? 'A' : 'B')}
+                {index === 0 ? 'A' : 'B'}
               </Text>
             </Billboard>
           )}

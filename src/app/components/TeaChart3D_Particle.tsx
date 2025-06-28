@@ -336,6 +336,25 @@ function TeaChart3DParticleScene() {
     return lines
   }, [dataPoints])
 
+  // Tạo đoạn thẳng trên đường OG từ 0.5×OG đến 1.5×OG
+  const ogLine = useMemo(() => {
+    if (dataPoints.length === 0) return null
+    
+    const pointG = dataPoints[dataPoints.length - 1] // Điểm G là điểm cuối cùng
+    const [gx, gy, gz] = pointG.position
+    
+    // Điểm bắt đầu = 0.5 * vector_OG
+    const startPoint = [gx * 0.5, gy * 0.5, gz * 0.5]
+    
+    // Điểm kết thúc = 1.5 * vector_OG
+    const endPoint = [gx * 1.5, gy * 1.5, gz * 1.5]
+    
+    return [
+      new THREE.Vector3(...startPoint), // Điểm 0.5×OG
+      new THREE.Vector3(...endPoint) // Điểm 1.5×OG
+    ]
+  }, [dataPoints])
+
   return (
     <>
       <ambientLight intensity={0.2} />
@@ -372,6 +391,20 @@ function TeaChart3DParticleScene() {
           opacity={0.5}
         />
       ))}
+      
+      {/* Đoạn thẳng trên đường OG từ 0.5×OG đến 1.5×OG */}
+      {ogLine && (
+        <Line 
+          points={ogLine} 
+          color="#ffffff" 
+          lineWidth={3} 
+          transparent 
+          opacity={0.8}
+          dashed
+          dashSize={0.1}
+          gapSize={0.05}
+        />
+      )}
       
       {/* Các điểm particle */}
       {dataPoints.map((point: any, index: number) => (

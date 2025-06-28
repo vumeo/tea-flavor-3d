@@ -2,16 +2,16 @@
 export const COLORS = {
   // Màu trục tọa độ
   axes: {
-    bitterness: '#a45429',    // Màu cafe cho trục Chát/Đắng
-    sweetness: '#ed8c00',     // Màu mật ong cho trục Ngọt
-    floral: '#fbeae9',        // Màu xanh nhạt cho trục Hương Hoa
+    bitterness: '#646b3a',    // Màu cafe cho trục Chát/Đắng
+    sweetness: '#a45429',     // Màu mật ong cho trục Ngọt
+    floral: '#9c88ff',        // Màu xanh nhạt cho trục Hương Hoa
   },
 
   // Màu điểm dữ liệu
   points: {
     normal: '#7bed9f',        // Màu xanh nhạt cho điểm thường
     special: '#f1c40f',       // Màu vàng cho điểm số 10
-    average: '#2f3640',       // Màu đen nhạt cho điểm trung bình (G)
+    average: '#ffffff',       // Màu đen nhạt cho điểm trung bình (G)
     contentSpecial: '#e67e22', // Màu cam cho điểm B trong Content
   },
 
